@@ -1,0 +1,14 @@
+import tkinter as tk
+
+WIDTH: int = 800
+HEIGHT: int = 600
+
+
+if __name__ == "__main__":
+    ///////////////////////////////////
+    canvas = tk.Canvas(window, width=WIDTH, height=HEIGHT)
+    canvas.pack()
+
+    canvas.create_rectangle(10, 20, 400, 300)
+    xfg f g
+    tk.mainloop()
