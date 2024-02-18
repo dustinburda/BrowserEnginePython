@@ -12,7 +12,7 @@ if __name__ == "__main__":
     canvas.create_rectangle(10, 20, 400, 300)    
     tk.mainloop()
 
-    print("Yada yada, this is rebase-branch")
+    print("Yada yada, this is  main branch")
 
     print("Hello this is I")
 
