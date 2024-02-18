@@ -16,6 +16,8 @@ if __name__ == "__main__":
 
     print("Hello this is I")
 
-    print("I want to make a merge conflict")
+    print("Merge conflicts..............!")
+
+    print("Fixed conflicts, I'm in rebase branch")
 
     print(4)
