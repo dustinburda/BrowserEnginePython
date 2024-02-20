@@ -1,0 +1,76 @@
+Chapter 1
+
+	Web browser displays content identified by URL. First step is to use URL to connect to server
+	somwhere on internet and download that information
+
+
+	URL looks like this:
+
+	http://example.org/index.html
+
+	scheme: http                    -----> HOW to get information
+	hostname: example.org           -----> WHERE to get information
+	path: index.html                -----> WHAT information to get
+
+	
+	With a URL, the browser can ask the OS to get in touch with server described by hostname
+	OS uses talks to DNS server which converts host name to a destination IP address
+	etc
+	(this is not a networking course)
+
+	On macOS, one can use netcat to connect to server:
+
+	   nc -v example.org 80
+
+	On Linux, one can use telnet to connect to server:
+
+	   telnet example.org 80
+
+
+	You'll get an output that looks like this:
+
+	       Trying 93.184.216.34...
+	       Connectd to example.org.
+	       Escape character is '^]'
+
+	This means that the OS converted host name example.org into 93.184.216.34
+
+	Once connected to the server, the web browser requests information from server by giving its path
+	In our example URL, the path is /index.html
+
+	The request looks like this:
+
+	    GET /index.html HTTP/1.0
+	    Host: example.org
+
+	GET means browser would like to recieve information, then comes the path /index.html,
+	then the version of HTTP the browser is using to communicate, HTTP/1.0
+
+	After the first line, each line contains a header, consisting of
+	a name (eg, Host) and a value (eg example.org)
+
+	After the headers comes a single blank line, this tells the host you are done with headers
+
+	
+
+
+
+
+	
+
+	
+	
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+	
