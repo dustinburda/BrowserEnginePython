@@ -3,23 +3,19 @@ import tkinter as tk
 from main import WIDTH, HEIGHT
 from url import lex
 
-H_STEP: int = 13
-V_STEP: int = 18
+H_STEP:      int = 13
+V_STEP:      int = 18
+SCROLL_STEP: int = 100
 
 
-@dataclass
 class Browser:
-    window: 'tk-window'
-    canvas: 'tk-canvas'
-    display_list: list[tuple[int, int, str]]
-    scroll: int
-
-    @staticmethod
-    def new_browser():
-        window = tk.Tk()
-        canvas = tk.Canvas(window, width=WIDTH, height=HEIGHT)
-        canvas.pack()
-        return Browser(window=window, canvas=canvas, display_list = [], scroll=0)
+    def __init__(self):
+        self.window = tk.Tk()
+        self.canvas = tk.Canvas(self.window, width=WIDTH, height=HEIGHT)
+        self.canvas.pack()
+        self.scroll = 0
+        self.window.bind("<Down>", self.scrolldown)
+        self.window.bind("<Up>", self.scrollup)
 
     def layout(self, text: str) -> list[tuple[int, int, str]]:
         cursor_x = H_STEP
@@ -36,13 +32,22 @@ class Browser:
         return display_list
 
     def draw(self):
+        self.canvas.delete("all")
         for coord_x, coord_y, c in self.display_list:
-            self.canvas.create_text(coord_x, coord_y, text=c)
+            self.canvas.create_text(coord_x, coord_y - self.scroll, text=c)
 
     def load(self, url: str):
         body = url.request()
         text = lex(body)
         self.display_list = self.layout(text)
+        self.draw()
+
+    def scrolldown(self, e):
+        self.scroll += SCROLL_STEP
+        self.draw()
+
+    def scrollup(self, e):
+        self.scroll -= SCROLL_STEP
         self.draw()
 
 
