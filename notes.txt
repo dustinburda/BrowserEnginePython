@@ -83,15 +83,22 @@ Chapter 1
 	host, path are split it "/"
 
 
-	In request, we will create a TCP socket, then connect to the host, given by self.host,
-	and then 
+	In the  request, we will create a TCP socket, then connect to the host on port 8-, given by self.host,
+	and then send an http request to self.host, GETting self.path
+
+	The socket's address familty (AF) is given by AF_INET
+	THe socket's type is SOCK_STREAM (meaning each computer can send arbitrary amounts of data)
+	The socket's prototcal is IPPROTO_TCP
+
+	Note, Python sockets' connect method takes a pair (host, port). This is different depending on the address family.
+
+
+	Important to note the the message in the send method must take information encoded as a an array of bytes.
+	(Next time we see an erro about str vs bytes, failing to encode an str is the likely culprit)
+
 	
 
-
-
-
 	
-
 	
 	
 
