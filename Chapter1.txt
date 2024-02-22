@@ -99,7 +99,16 @@ Chapter 1
 	
 
 	
-	
+	Our process can be summarized as follows:
+	    - Create URL object (split at ://, / for scheme, host, path
+	    - Open a socket and make an HTTP request to host
+	    - Parse HTTP response
+	      - Get status line (eg, HTTP/1.0 200 OK\r\n)
+	      - Parse headers
+	      - Break when encountering \r\n
+	    - Return body
+	    - Parse body by printing all text not in a tag (one character at a time)
+	    
 	
 
 	

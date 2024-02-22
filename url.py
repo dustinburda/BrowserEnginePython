@@ -45,19 +45,17 @@ class URL:
         return body
 
 
-def show(body: str):
+def lex(body: str):
     in_tag = False
+    text = ""
     for c in body:
         if c == "<":
             in_tag = True
         if c == ">":
             in_tag = False
         elif not in_tag:
-            print(c, end="")
-
-def load(url: URL):
-    body = url.request()
-    show(body)
+            text += c
+    return text
 
 
 

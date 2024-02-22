@@ -1,0 +1,70 @@
+Chapter 2
+
+	Web browsers do more than just download web pages and display raw text. We will need a GUI.
+
+	OS's provide desktop environments: windows, buttons, mice, etc
+	Programs control their windows but the desktop environment controls the screen
+
+	Hence,
+		Program asks for new window and desktop environment actually displays it
+		Programs draw to its window and desktop environment actually puts that on the screen
+		Desktop environment tells program about clicks and key presses, and program responds and redraws window
+
+
+	We can use a graphical tooklike like Tk to simply this process for us.
+	Python has a built package for Tk called tkinter.
+
+	Tkinter's main loop looks like this:
+
+		  while True:
+		  	for evt in pendingEvents():
+			    handleEvent(evt)
+			drawScreen()
+
+
+	pendingEvents() asks desktop environment for recent mouse clicks or key presses, then handleEvent calls
+	your application to update state. drawScreen redraws the window
+
+	This kind of pattern is known as an event loop is common in many types of applications, namely web browsers, video gams,
+	complex GUI applications, networked applications, etc
+
+
+	We will create a window and a canvas inside that window.
+	canvas.pack() is a Tk peculiarity. It positions the canvas inside the window.
+
+
+	To keep all this code organized, we will place the window/canvas instantiation logic in a class
+	called 'Browser'
+
+	The constructor for the browser will create a window, canvas, pack canvas, etc
+	The load function will add primitives
+	The tkinter mainloop() call will still exist in main
+	
+	To render text, we will first get the body of the HTTP request (HTML + CSS)  from URL request function
+	Then we will create a function "lex" which will extract the text elements from the body
+
+	Then we will create vertical and horizontal "steps" for our y,x cursors respectively. Each character we print
+	from the text, we will increment the x cursor by H_STEP. When there is not enough space left in a single line,
+	we reset the x_cursor and increment y_cursor by V_STEP
+
+
+	To introduce scrolling, we will need a layer of indirection between text coordinates and scrolling coordinates
+	Generally speaking, a browser lays everything out in page coordinates
+	Then, it renders everything in screen coordinates
+
+
+	Right now, load(url) computes position of each character, and then rendeers it
+	We will need to split this into multiple operations
+
+	We will need a layout method
+	   	       draw   method
+	and a load method which will combine the two together
+
+	We will need a display_list member variable which holds the coordinates of each character
+
+	Further more, we will need a scroll member variable which holds an offset and a limit
+	for which characters we render on the screen. Those outside the offset and the limit
+	will get "clipped"
+
+	
+		
