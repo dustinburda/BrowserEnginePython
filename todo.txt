@@ -1,28 +1,29 @@
 2/23
-    4,5
+    4
+    first half 5
+        (
+            Layout Tree,
+            Block Layout,
+            Size and Position
+        )
+
 2/24
-    6,7
+    second half 5
+        (
+            Recursive Painting,
+            Backgrounds
+        )
+    6
 2/25
-    8,9
+    7
 2/26
-    10,11
-2/27
-    12,13
+    11
 
-
-GoLang rewrite from scratch using Skia
-
-2/28
-    1,2
-2/29
-    3,4
-3/1
-    5,6
-3/2
-    7,8
-3/3
-    9,10
-3/4
-    11, 12
-3/5
-    13
+GoLang Rewrite
+Use Skia, SDL from the beginning
+    2/27
+        1,2,3
+    2/28
+        4,5,6
+    2/29
+        7,11

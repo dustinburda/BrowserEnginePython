@@ -25,17 +25,17 @@ class Browser:
 
     def layout(self, tokens: list[str]) -> list[tuple[int, int, str]]:
         # TODO: refactor this
+        display_list = []
         cursor_x = H_STEP
         cursor_y = V_STEP
-        display_list = []
-
         weight = "normal"
         style = "roman"
+        size = 16
 
         for tok in tokens:
             if isinstance(tok, Text):
                 for word in tok.text.split():
-                    font = tkinter.font.Font(size=16, weight=weight, slant="italic")
+                    font = tkinter.font.Font(size=size, weight=weight, slant=style)
                     w = font.measure(word)
 
                     if word == "\n":
@@ -89,5 +89,3 @@ class Browser:
         print("Min: ", self.min, "Scroll: ", self.scroll)
         print(self.scroll)
         self.draw()
-
-
