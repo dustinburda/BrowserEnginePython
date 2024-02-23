@@ -1,7 +1,8 @@
+from dataclasses import dataclass
+@dataclass
 class Text:
-    def __init__(self, text: str):
-        self.text = text
+    text: str
 
+@dataclass
 class Tag:
-    def __init__(self, tag: str):
-        self.tag = tag
+    tag: str

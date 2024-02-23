@@ -1,0 +1,101 @@
+Chapter 3
+
+	We have a text rendering system in place, but only deals with location.
+	We have never dealt with font, size, or color
+
+	So what exactly is a font?
+	In the days of the printing press, printers arranged little metal slugs on rails, covering them with ink, and
+	pressed them to a sheet of paper, creating a printed page.
+
+	Metal shapes came in boxes one per letter. The boxes came in cases (one for lowerCASE, one for upperCASE)
+	The set of cases was called a font.
+	If you wanted to print a larger text, you needed bigger (different) shapes
+
+
+	A collection of fonts was called a type. Variations like bold or italic letters were called "faces"
+
+	Things are different with computers. In particular, "font" now means font, typeface, or type.
+
+	Tk's font objects correspond to the older meaning of font: a type at a fixed size, style, and weight
+
+	
+	Text takes up space vertically and horizontally.
+	A font object's metric and measure methods measure that space, respectively
+
+	>>> bi_times.metrics()
+	{'ascent': 15, 'descent': 4, 'linespace': 19, 'fixed': 0}
+	>>> bi_times.measure("Hi!")
+	31
+
+	metrics() call yields information about vertical dimensions of text:
+		  linespace --> how tall text is
+		  ascent    --> above "the line"
+		  descent   --> below "the line"
+		  	    (note, ascent + descent = linespace)
+
+	Note, different size 16 fonts will report different heights.
+	
+	This is because size 16 means 16 points, ie a 72nd of an inch, not sixteen pixels and further more,
+	those sixteen points measure not individual letters, but the metal blocks the letters were carved from,
+	so those letters must be less than 16 points.
+
+	>>> tkinter.font.Font(family="Courier", size=16).metrics()
+	{'fixed': 1, 'ascent': 13, 'descent': 4, 'linespace': 17}
+	>>> tkinter.font.Font(family="Times", size=16).metrics()
+	{'fixed': 0, 'ascent': 14, 'descent': 4, 'linespace': 18}
+	>>> tkinter.font.Font(family="Helvetica", size=16).metrics()
+	{'fixed': 1, 'ascent': 15, 'descent': 4, 'linespace': 19}
+
+	
+
+	The measure() call is more direct. It tells you how much horizontal space text takes up in pixels.
+	This depends on the text.
+
+	>>> bi_times.measure("Hi!")
+	31
+	>>> bi_times.measure("H")
+	17
+	>>> bi_times.measure("i")
+	8
+	>>> bi_times.measure("!")
+	6
+
+	(17 + 8 + 6 = 31)
+
+
+	We can use this information to layout text on the page.
+
+	As an example, suppose we wanted to draw the text "Hello, world!" in two pieces,
+	so that the "world!" is italic.
+
+	We can use two fonts:
+
+	   font1 = tkinter.font.Font(family="Times", size=16)
+	   font2 = tkinter.font.Font(family="Times", size=16, slant="italic")
+
+
+	Now let's layout the text starting at (200, 200)
+
+	    x,y = 200
+	    canvas.create_text(x, y, text="Hello, ", font=font1)
+	    x += font1.measure("Hello, ")
+	    canvas.create_text(x, y, text="world!", font=font2)
+
+	This code has a bug. If decided to change the word "world!" to "overlapping!", the words "Hello, " and "overlapping!",
+	would overlap.
+
+	This is because the coordinates we pass into create_text are for the center of the text.
+	We need the upper corner.
+	To do this, we set the "anchor" argument to "nw" (meaning "northwest" corner of text)
+
+	    x,y = 200
+	    canvas.create_text(x, y, text="Hello, ", font=font1, anchor="nw")
+	    x += font1.measure("Hello, ")
+	    canvas.create_text(x, y, text="world!", font=font2, anchor="nw")
+
+	Previously, we 
+
+
+
+
+
