@@ -67,4 +67,7 @@ Chapter 2
 	will get "clipped"
 
 	
-		
+	Finally, we will register a callback "scrolldown" which increments the "scroll" member variable
+	when the "<Down>" event is called (ie when the down array key is pressed)
+
+	When drawing text, we subtract the scroll amount from the y coordinate

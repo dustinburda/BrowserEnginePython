@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 import tkinter as tk
+import tkinter.font
 from main import WIDTH, HEIGHT
 from url import lex
+from elements import Tag, Text
 
 H_STEP:      int = 13
 V_STEP:      int = 18
@@ -20,15 +22,19 @@ class Browser:
         self.window.bind("<Down>", self.scrolldown)
         self.window.bind("<Up>", self.scrollup)
 
+        self.bi_times = tkinter.font.Font(family="Times", size=16, weight="bold",slant="italic")
+        print(self.bi_times.metrics())
+        print(self.bi_times.measure("Hi!"))
+
     def layout(self, text: str) -> list[tuple[int, int, str]]:
         cursor_x = H_STEP
         cursor_y = V_STEP
         display_list = []
         for c in text:
-            if c == "\n":
-                cursor_x = H_STEP
-                cursor_y += N_STEP
-                continue
+            # if c == "\n":
+            #     cursor_x = H_STEP
+            #     cursor_y += N_STEP
+            #     continue
 
             display_list.append((cursor_x, cursor_y, c))
             cursor_x += H_STEP
@@ -46,7 +52,7 @@ class Browser:
                 continue
             if coord_y + V_STEP < self.scroll:
                 continue
-            self.canvas.create_text(coord_x, coord_y - self.scroll, text=c)
+            self.canvas.create_text(coord_x, coord_y - self.scroll, text=c, anchor="nw")#, font=self.bi_times)
 
     def load(self, url: str):
         body = url.request()
