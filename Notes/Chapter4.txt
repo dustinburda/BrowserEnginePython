@@ -1,0 +1,55 @@
+Chapter 4
+
+	So far, our web browser sees web pages as streams of open tags, close tags, and texts.
+	HTML is actually a tree. Though it hasn't been important yet, it will be central
+	for later features like CSS, JS, visual effects, etc
+
+
+	The HTML Tree will have one node for each open and close tag pair
+	    	      	   	    	 for each span of text
+
+	We will create two classes representing these nodes
+
+	   class Text
+	   class Element
+
+	Both will have the following data members:
+
+	   self.tag / self.text
+	   self.parent
+	   self.children
+
+	Constructing a tree of nodes from text is called parsing.
+	A parser builds a tree one element of text node at a time.
+
+	This means the parser must build an incomplete tree as it goes.
+
+
+
+
+	Take the following text for example:
+
+	     <html><video></video><section><h1>This is my webpage
+
+	The video tag is finished
+	The section, h1 tags are unfinished
+
+
+		
+	Since the parser reads an HTML file from beginning to end, there are unfinished tags
+	in a certain part of the tree.
+	There are three things to note:
+	      1) Unfinished tags have always been opened but not closed yet
+	      2) They are always later in the source than finished nodes
+	      3) They are always children of other unfinished tags
+
+	We can leverage these facts by storing a list of unfinished tags, ordered with parents
+	before children.
+	The first node is the root of the HTML tree
+	The last node is the most recent unfinished tag
+
+
+	Parsing is more complex than our lex function.
+	We will want to break into several functions, organized in a new HTMLParser class.
+
+	
