@@ -6,8 +6,7 @@ from url import lex
 from elements import Tag, Text
 from layout import Layout, H_STEP, V_STEP
 
-
-N_STEP:      int = 24
+N_STEP: int = 24
 SCROLL_STEP: int = 100
 
 
@@ -29,7 +28,8 @@ class Browser:
                 continue
             if coord_y + V_STEP < self.scroll:
                 continue
-            self.canvas.create_text(coord_x, coord_y - self.scroll, text=word, anchor="nw", font=font)#, font=self.bi_times)
+            self.canvas.create_text(coord_x, coord_y - self.scroll, text=word, anchor="nw",
+                                    font=font)  # , font=self.bi_times)
 
     def load(self, url: str):
         body = url.request()
@@ -43,7 +43,7 @@ class Browser:
 
     def scrolldown(self, e):
         self.scroll += min(SCROLL_STEP, self.max - self.scroll)
-        #self.scroll += SCROLL_STEP
+        # self.scroll += SCROLL_STEP
         # print("Max: ", self.max, "Scroll: ", self.scroll)
         self.draw()
 
